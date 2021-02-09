@@ -1,6 +1,6 @@
 package com.test_feauters;
 
-import android.app.Application;
+// import android.app.Application;// commented by daria
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
@@ -11,7 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-// import android.support.multidex.MultiDexApplication;
+// import android.support.multidex.MultiDexApplication; // custome
 import androidx.multidex.MultiDexApplication; // custome
 
 // public class MainApplication extends Application implements ReactApplication {
