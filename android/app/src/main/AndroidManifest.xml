@@ -3,6 +3,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- .MainActivity instead MultiDexApplication custome -->
+    <!-- android:name="androidx.multidex.MultiDexApplication"  -->
+    <!-- android:name=".MainApplication"  -->
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
