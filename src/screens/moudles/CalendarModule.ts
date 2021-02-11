@@ -21,7 +21,7 @@ interface CalendarInterface {
     location: string,
     // promise: Promise<number>,
   ): void;
-  getConstants(): object;
+  getConstants(): any;
 }
 
 export default CalendarModule as CalendarInterface;

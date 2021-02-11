@@ -1,16 +1,35 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import {
+  Button,
+  NativeEventEmitter,
+  StyleSheet,
+  View,
+  NativeModules,
+} from 'react-native';
 import CalendarModule from './moudles/CalendarModule';
 
 export default function NativeJavaModuleScreen() {
+  // maybe BackHandler instead EventListener
+  React.useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
+    // in doc using 'this' instead 'window'
+    window.eventListener = eventEmitter.addListener(
+      'EventReminder',
+      (event) => {
+        console.log(event.eventProperty); // "someValue"
+      },
+    );
+    return () => {
+      // need use 'this' instead 'window' may be 'BackHandler'
+      window.eventListener.remove();
+    };
+  }, []);
   // We will inoke the native module here!'
-  /* function onPress() {
+  function getConstants() {
     const { DEFAULT_EVENT_NAME } = CalendarModule.getConstants();
 
     console.log(DEFAULT_EVENT_NAME);
-
-    CalendarModule.createCalendarEvent('foo', 'bar');
-  } */
+  }
 
   const onSubmit = async () => {
     try {
@@ -42,6 +61,7 @@ export default function NativeJavaModuleScreen() {
 
   return (
     <View style={styles.root}>
+      <Button title="GET CONSTANTS" color="#141584" onPress={getConstants} />
       <Button
         title="Click to invoke your native module!"
         color="#841584"
