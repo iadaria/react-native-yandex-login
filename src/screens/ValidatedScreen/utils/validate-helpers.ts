@@ -28,79 +28,16 @@ export function validateInput({ type, value }: IInput) {
 interface InputValidationStateProps {
   input: IInput;
   value: string;
+  touched: boolean;
 }
 
-export function getValidatedInput({ input, value }: InputValidationStateProps): IInput {
+export function getValidatedInput({ input, value, touched }: InputValidationStateProps): IInput {
+  // console.log(`[getValidatedInput] touched = ${touched} and input.touched = ${input.touched}`);
   return {
     ...input,
     value,
     errorLabel: input?.optional ? null : validateInput({ type: input.type, value }),
+    touched: touched, //|| input.touched,
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-/* export function checkFormValidation(
-  inputs: IInputs,
-  setInputs: (inputs: IInputs) => void,
-): number | null {
-  const updatedInputs = { ...inputs };
-  for (const [key, input] of Object.entries(inputs)) {
-    updatedInputs[key as keyof typeof inputs] = getInputValidationState({
-      input,
-      value: input.value,
-    });
-  }
-  setInputs(updatedInputs);
-
-  return getFirstInvalidInput({ inputs: updatedInputs });
-} */
-
-/* export function setInputPosition(
-  { ids, value }: { ids: [keyof typeof inputs]; value: number },
-  inputs: IInputs,
-  setInputs: (inputs: IInputs) => void,
-): void {
-  const updatedInputs: IInputs = inputs; // don't need render interface
-
-  ids.forEach((id: keyof typeof inputs) => {
-    updatedInputs[id].yCoordinate = value;
-  });
-
-  setInputs(updatedInputs);
-} */
-
-/* interface IInputHandlProps {
-  id: keyof typeof defaultInputs;
-  value: string;
-  cb: () => void;
-}
-
-export function handleInputChange(
-  { id, value, cb = () => {} }: IInputHandlProps,
-  inputs: IInputs,
-  setInputs: (inputs: IInputs) => void,
-) {
-  setInputs({
-    ...inputs,
-    [id]: getInputValidationState({
-      input: inputs[id],
-      value,
-    }),
-  });
-} */
-
-/* export function getFirstInvalidInput({ inputs }: { inputs: IInputs }): number | null {
-  let firstInvalidCoordinate: number | null = Infinity;
-
-  // for(const [key, input] of Object.entries(inputs)) {
-  for (const [_, input] of Object.entries(inputs)) {
-    if (input.errorLabel && input.yCoordinate < firstInvalidCoordinate!) {
-      firstInvalidCoordinate = input.yCoordinate;
-    }
-  }
-
-  if (firstInvalidCoordinate === Infinity) {
-    firstInvalidCoordinate = null;
-  }
-  return firstInvalidCoordinate;
-} */
