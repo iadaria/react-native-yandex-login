@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Button, StyleSheet, Text } from 'react-native';
+import { TestTextInput } from './components/TestTextInput';
 /// import { TestTextInput } from './components/TestInputText';
-import ValidatedElements, { TestTextInput } from './components/ValidatedElements';
+import ValidatedElements from './components/ValidatedElements';
 
 export default function ValidatedScreen() {
   return (
@@ -11,6 +12,7 @@ export default function ValidatedScreen() {
       <TestTextInput style={styles.input} label="Last name" id="last_name" />
       <TestTextInput style={styles.input} label="Birthday month" id="birthday_month" />
       <TestTextInput style={styles.input} label="password" id="password" />
+      <Button color="green" title="Check all" onPress={() => {}} accessibilityLabel="HZ" />
     </ValidatedElements>
   );
 }
