@@ -1,40 +1,57 @@
 import React from 'react';
 import { ScrollView, LayoutChangeEvent } from 'react-native';
-import { defaultInputs, IInputs } from '../constants/inputs';
 import { getValidatedInput } from '../utils/validate-helpers';
 import { ITestInputProps } from './TestTextInput';
+import { IInput } from '../contracts/input';
 
-interface InputChangeProps {
+/* interface InputChangeProps {
   id: keyof typeof defaultInputs;
   value: string;
-}
+} */
+interface IChild<T> extends JSX.Element, ITestInputProps<T> {}
 
-interface IChild extends JSX.Element, ITestInputProps {}
+// interface ValidatedElementsProps<T extends { [key: string]: IInput }> {
+//   defaultInputs: T;
+// }
 
-const ValidatedElements: React.FC<React.ReactNode> = ({ children }) => {
-  const [inputs, setInputs] = React.useState<IInputs>(defaultInputs);
+// type PropsWhithChildren<P> = P & { children?: React.ReactNode };
+
+/* function ValidatedElements<T extends { [key: string]: IInput }>({
+  children,
+  defaultInputs,
+}: {
+  children?: React.ReactNode;
+  defaultInputs: T;
+}) { */
+function ValidatedElements<T extends { [key: string]: IInput }>({
+  children,
+  defaultInputs,
+}: {
+  children?: React.ReactNode;
+  defaultInputs: T;
+}) {
+  const [inputs, setInputs] = React.useState<T>(defaultInputs);
   const scrollView = React.useRef<ScrollView>(null);
 
-  // React.useEffect(() => {
-  //   console.log('changed inputs', JSON.stringify(inputs, null, 4));
-  // }, [inputs]);
+  React.useEffect(() => {
+    console.log('changed inputs', JSON.stringify(inputs, null, 4));
+  }, [inputs]);
 
-  function handleAllValidate(): IInputs {
+  function handleAllValidate(): T /* IInputs */ {
     console.log('[handleAllValidate]');
     const updatedInputs = { ...inputs };
     for (const [key, input] of Object.entries(inputs)) {
       updatedInputs[key as keyof typeof inputs] = getValidatedInput({
         input,
-        value: input.value,
+        value: input.value.toString(),
         touched: true,
       });
     }
     setInputs(updatedInputs);
     return updatedInputs;
-    // setInputs((prevInputs: IInputs) => ({ ...prevInputs, ...updatedInputs }));
   }
 
-  function getFirstInvalidInput(validatedInputs: IInputs): number | null {
+  function getFirstInvalidInput(validatedInputs: T /* IInputs */): number | null {
     let firstInvalidCoordinate: number = Infinity;
 
     for (const input of Object.values(validatedInputs)) {
@@ -51,7 +68,7 @@ const ValidatedElements: React.FC<React.ReactNode> = ({ children }) => {
   }
 
   function setInputPosition({ ids, value }: { ids: [keyof typeof inputs]; value: number }) {
-    const updatedInputs: IInputs = { ...inputs };
+    const updatedInputs: T /* IInputs  */ = { ...inputs };
 
     ids.forEach((id: keyof typeof inputs) => {
       updatedInputs[id].yCoordinate = value;
@@ -60,7 +77,7 @@ const ValidatedElements: React.FC<React.ReactNode> = ({ children }) => {
     setInputs(updatedInputs);
   }
 
-  function handleInputChange({ id, value }: InputChangeProps) {
+  function handleInputChange({ id, value }: { id: keyof typeof defaultInputs; value: string }) {
     setInputs({
       ...inputs,
       [id]: getValidatedInput({
@@ -85,13 +102,13 @@ const ValidatedElements: React.FC<React.ReactNode> = ({ children }) => {
     }
   }
 
-  const isTextInput = (child: IChild) => child.type.name === 'TestTextInput';
-  const isButton = (child: IChild) => child.type.name === 'Button';
+  const isTextInput = (child: IChild<T>) => child.type.name === 'TestTextInput';
+  const isButton = (child: IChild<T>) => child.type.name === 'Button';
 
   function renderChildren(): React.ReactNode {
-    return React.Children.map(children as IChild[], (child: IChild) => {
+    return React.Children.map(children as IChild<T>[], (child: IChild<T>) => {
       if (isTextInput(child)) {
-        const { id }: ITestInputProps = child.props;
+        const { id }: ITestInputProps<T> = child.props;
         return React.cloneElement(child, {
           onChangeText: (value: string) => handleInputChange({ id, value }),
           onLayout: ({ nativeEvent }: LayoutChangeEvent) => {
@@ -114,6 +131,6 @@ const ValidatedElements: React.FC<React.ReactNode> = ({ children }) => {
   }
 
   return <ScrollView ref={scrollView}>{renderChildren()}</ScrollView>;
-};
+}
 
 export default ValidatedElements;

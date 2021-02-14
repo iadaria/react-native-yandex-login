@@ -1,6 +1,6 @@
-import { validationDictionary } from '../dictionary';
+import { IInput } from './input';
 
-export const defaultInputs: IInputs = {
+export const defaultInputs: IInputsOne = {
   first_name: {
     type: 'generic',
     value: '',
@@ -39,16 +39,7 @@ export const defaultInputs: IInputs = {
   },
 };
 
-export interface IInput {
-  type: string & keyof typeof validationDictionary;
-  value: string | boolean;
-  errorLabel?: string;
-  optional?: boolean;
-  yCoordinate?: number;
-  touched?: boolean;
-}
-
-export interface IInputs {
+export interface IInputsOne {
   first_name: IInput;
   last_name: IInput;
   birthday_month: IInput;
@@ -59,3 +50,15 @@ export interface IInputs {
   tos: IInput;
   password: IInput;
 }
+
+/* export interface IInputsOne {
+  first_name: IInput<IInputsOne>;
+  last_name: IInput<IInputsOne>;
+  birthday_month: IInput<IInputsOne>;
+  birthday_day: IInput<IInputsOne>;
+  birthday_year: IInput<IInputsOne>;
+  state: IInput<IInputsOne>;
+  zip: IInput<IInputsOne>;
+  tos: IInput<IInputsOne>;
+  password: IInput<IInputsOne>;
+} */

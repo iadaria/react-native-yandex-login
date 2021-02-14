@@ -3,15 +3,16 @@ import { Button, StyleSheet, Text } from 'react-native';
 import { TestTextInput } from './components/TestTextInput';
 /// import { TestTextInput } from './components/TestInputText';
 import ValidatedElements from './components/ValidatedElements';
+import { defaultInputsTwo } from './contracts/inputsTwo';
 
 export default function ValidatedScreen() {
   return (
-    <ValidatedElements>
+    <ValidatedElements defaultInputs={defaultInputsTwo}>
       <TestTextInput style={styles.input} label="First name" id="first_name" />
       <Text>Dasha</Text>
       <TestTextInput style={styles.input} label="Last name" id="last_name" />
-      <TestTextInput style={styles.input} label="Birthday month" id="birthday_month" />
-      <TestTextInput style={styles.input} label="password" id="password" />
+      {/* <TestTextInput style={styles.input} label="Birthday month" id="birthday_month" />
+      <TestTextInput style={styles.input} label="password" id="password" /> */}
       <Button color="green" title="Check all" onPress={() => {}} accessibilityLabel="HZ" />
     </ValidatedElements>
   );

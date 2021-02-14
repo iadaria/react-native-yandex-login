@@ -1,16 +1,17 @@
 import React from 'react';
 import { LayoutChangeEvent, StyleSheet, Text, TextInput, TextProps, View } from 'react-native';
-import { defaultInputs } from '../constants/inputs';
+// import { defaultInputs } from '../contracts/inputsOne';
 
-export interface ITestInputProps extends TextProps {
-  id: keyof typeof defaultInputs;
+export interface ITestInputProps<T> extends TextProps {
+  // id: keyof typeof defaultInputs;
+  id: keyof T;
   error?: string;
   label?: string;
   touched?: boolean;
   onLayout?: (props: LayoutChangeEvent) => void;
 }
 
-export function TestTextInput(props: ITestInputProps): JSX.Element {
+export function TestTextInput<T>(props: ITestInputProps<T>): JSX.Element {
   const [isTouched, setIsTouched] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState(false);
 
