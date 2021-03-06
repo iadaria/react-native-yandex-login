@@ -1,6 +1,6 @@
 import { validationDictionary } from '../dictionary';
 import validatejs from 'validate.js';
-import { IInput /* , IInputs, defaultInputs */ } from '../constants/inputs';
+import { IInput } from '../contracts/input';
 
 /* interface IValidateInputProps {
   type: keyof typeof validationDictionary;

@@ -10,12 +10,22 @@ import { NativeModules } from 'react-native';
 const { CalendarModule } = NativeModules;
 
 interface CalendarInterface {
-  createCalendarEvent(
+  /* createCalendarEvent(
     name: string,
     location: string,
     myFailureCallback: (error: string | null) => void,
     callback: (secondError: string, eventId: number) => void,
-  ): void;
+  ): void; */
+  // ios
+  /*  callback(@[@(eventId)]);
+  createCalendarEvent(name: string, location: string, callbak: (eventId: number) => void): void;*/
+  // callback(@[[NSNull null], eventId])
+  /* createCalendarEvent(
+    name: string,
+    location: string,
+    callback: (error: string, eventId: number) => void,
+  ): void; */
+  createCalendarEvent(name: string, location: string): Promise<number>;
   createCalendarEventTwo(
     name: string,
     location: string,

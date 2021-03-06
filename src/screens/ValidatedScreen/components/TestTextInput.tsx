@@ -1,8 +1,8 @@
 import React from 'react';
-import { LayoutChangeEvent, StyleSheet, Text, TextInput, TextProps, View } from 'react-native';
+import { LayoutChangeEvent, StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
 // import { defaultInputs } from '../contracts/inputsOne';
 
-export interface ITestInputProps<T> extends TextProps {
+export interface ITestInputProps<T> extends TextInputProps {
   // id: keyof typeof defaultInputs;
   id: keyof T;
   error?: string;

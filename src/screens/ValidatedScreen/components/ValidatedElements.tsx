@@ -45,7 +45,7 @@ function ValidatedElements<T extends { [key: string]: IInput }>({
         input,
         value: input.value.toString(),
         touched: true,
-      });
+      }) as T[keyof T];
     }
     setInputs(updatedInputs);
     return updatedInputs;

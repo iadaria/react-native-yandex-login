@@ -10,6 +10,9 @@ target 'test_feauters' do
 
   target 'test_feautersTests' do
     inherit! :complete
+
+    pod 'RCTCalendarModule', :path => '../..'
+
     # Pods for testing
   end
 

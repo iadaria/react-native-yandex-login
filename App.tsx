@@ -10,9 +10,9 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ValidateScreen">
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Navigator initialRouteName="NativeJavaModuleScreen">
         <Stack.Screen name="NativeModule" component={NativeJavaModuleScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="ValidateScreen" component={ValidatedScreen} />
       </Stack.Navigator>
     </NavigationContainer>
