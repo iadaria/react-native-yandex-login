@@ -1,4 +1,9 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  test_feauters-Bridging-Header.h
+//  test_feauters
+//
+//  Created by Daria Iakimova on 07.03.2021.
 //
 
+// CalendarManager-Bridging-Header.h
+#import <React/RCTBridgeModule.h>

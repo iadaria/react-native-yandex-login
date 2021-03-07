@@ -20,6 +20,10 @@
 		5663745D7B6AB2ACAAF8E00C /* libPods-test_feauters-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BA9A46796A151C1F37248C /* libPods-test_feauters-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AB008BD1FCD942D6DB0A8FA3 /* libPods-test_feauters-test_feautersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8B0EBAE1C28792E49AE397F /* libPods-test_feauters-test_feautersTests.a */; };
+		BD13B7E625F46DF200E68094 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD13B7E525F46DF200E68094 /* CalendarManager.swift */; };
+		BD13B7E725F46DF200E68094 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD13B7E525F46DF200E68094 /* CalendarManager.swift */; };
+		BD13B7ED25F472C600E68094 /* CalendarManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD13B7EC25F472C600E68094 /* CalendarManagerBridge.m */; };
+		BD13B7EE25F472C600E68094 /* CalendarManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD13B7EC25F472C600E68094 /* CalendarManagerBridge.m */; };
 		BD9DB67625D366D50063FA6A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9DB67525D366D50063FA6A /* File.swift */; };
 		BDA7297225F30A76008D4989 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7297125F30A76008D4989 /* RCTCalendarModule.m */; };
 		BDA7297325F30A76008D4989 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7297125F30A76008D4989 /* RCTCalendarModule.m */; };
@@ -65,6 +69,9 @@
 		9869E539B03E0DE6C775D33A /* Pods-test_feauters.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_feauters.release.xcconfig"; path = "Target Support Files/Pods-test_feauters/Pods-test_feauters.release.xcconfig"; sourceTree = "<group>"; };
 		A8B0EBAE1C28792E49AE397F /* libPods-test_feauters-test_feautersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test_feauters-test_feautersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1643FD2C8CCFCA5FCD30745 /* Pods-test_feauters-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_feauters-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-test_feauters-tvOSTests/Pods-test_feauters-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		BD13B7E525F46DF200E68094 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		BD13B7EC25F472C600E68094 /* CalendarManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarManagerBridge.m; sourceTree = "<group>"; };
+		BD13B84925F4906B00E68094 /* test_feauters-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test_feauters-Bridging-Header.h"; sourceTree = "<group>"; };
 		BD9DB67425D366D50063FA6A /* test_feauters-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test_feauters-Bridging-Header.h"; sourceTree = "<group>"; };
 		BD9DB67525D366D50063FA6A /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		BDA7297025F30A3E008D4989 /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTCalendarModule.h; sourceTree = "<group>"; };
@@ -183,6 +190,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BD13B84925F4906B00E68094 /* test_feauters-Bridging-Header.h */,
+				BD13B7EC25F472C600E68094 /* CalendarManagerBridge.m */,
+				BD13B7E525F46DF200E68094 /* CalendarManager.swift */,
 				BDA7297125F30A76008D4989 /* RCTCalendarModule.m */,
 				BDA7297025F30A3E008D4989 /* RCTCalendarModule.h */,
 				13B07FAE1A68108700A75B9A /* test_feauters */,
@@ -303,6 +313,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1240;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -612,6 +623,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD13B7EE25F472C600E68094 /* CalendarManagerBridge.m in Sources */,
+				BD13B7E725F46DF200E68094 /* CalendarManager.swift in Sources */,
 				00E356F31AD99517003FC87E /* test_feautersTests.m in Sources */,
 				BDA7297325F30A76008D4989 /* RCTCalendarModule.m in Sources */,
 			);
@@ -625,6 +638,8 @@
 				BD9DB67625D366D50063FA6A /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				BDA7297225F30A76008D4989 /* RCTCalendarModule.m in Sources */,
+				BD13B7ED25F472C600E68094 /* CalendarManagerBridge.m in Sources */,
+				BD13B7E625F46DF200E68094 /* CalendarManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +682,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -681,6 +697,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "test_feautersTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/test_feauters.app/test_feauters";
 			};
 			name = Debug;
@@ -691,6 +710,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = test_feautersTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -702,6 +722,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "test_feautersTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/test_feauters.app/test_feauters";
 			};
 			name = Release;
