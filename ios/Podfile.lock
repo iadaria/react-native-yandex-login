@@ -332,6 +332,8 @@ PODS:
     - React-Core
   - RNScreens (2.17.1):
     - React-Core
+  - When (5.0.0)
+  - YandexLoginSDK (2.0.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -389,6 +391,8 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - When
+  - YandexLoginSDK
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -407,6 +411,8 @@ SPEC REPOS:
     - FlipperKit
     - libevent
     - OpenSSL-Universal
+    - When
+    - YandexLoginSDK
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -521,9 +527,11 @@ SPEC CHECKSUMS:
   RNGestureHandler: 03f587ba19a7e2d9fe48fb9aa6e33ace5fd07dd5
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
+  When: ac659b48746fe8970737efcb9c97a7d063026a5c
+  YandexLoginSDK: cd407482207b4b7da75c5f7d7fd2fdd6a604c325
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: ecce430a7a6adfafd038f06a52433b9fed004457
+PODFILE CHECKSUM: 7fbd8023fdfaf6e16abd95f24e9a57e6128552f1
 
 COCOAPODS: 1.10.1

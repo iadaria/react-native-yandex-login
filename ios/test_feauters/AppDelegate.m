@@ -11,8 +11,17 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+#import <YandexLoginSDK/YandexLoginSDK.h>
+#import "test_feauters-Swift.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#if RCT_DEV
+#import <React/RCTDevLoadingView.h>
+#endif
+
+#define IS_IOS11orHIGHER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)
+#define IS_IOS8orLOWER ([[[UIDevice currentDevice] systemVersion] floatValue] <= 8.0)
+#define IS_IOS9orLOWER ([[[UIDevice currentDevice] systemVersion] floatValue] > 8.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <= 9.0)
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -34,6 +43,9 @@ static void InitializeFlipper(UIApplication *application) {
 #endif
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+  #if RCT_DEV
+    [bridge moduleForClass:[RCTDevLoadingView class]];
+  #endif
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"test_feauters"
                                             initialProperties:nil];
@@ -51,6 +63,21 @@ static void InitializeFlipper(UIApplication *application) {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   
+  NSString *clientId = @"707f8fd9b4cf43ea846143b487d73c45";
+  NSError *error;
+  @try {
+    // BOOL resultActivate = [YandexLoginService activateWithAppId:clientId error:nil];
+    BOOL resultActivate = [CalendarManager activateWithAppId:clientId error:nil];
+    // BOOL result = [[YXLSdk shared] activateWithAppId:clientId error:nil];
+    NSLog(resultActivate ? @"YES!!! YXLSdk is initialized" : @"NO YXSdk isn't initialized");
+    // YXLSdk.shared.activate(withAppId: clientId)
+  }
+  
+  @catch ( NSException *e ) {
+    NSLog(@"%@", e);
+    NSLog(@"%@ Error from ", error);
+  }
+  
   return YES;
 }
 
@@ -65,13 +92,34 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
+            sourceApplication:(NSString *)sourceApplication
+            annotatioin:(id)annotation
+{
+  // return [[YXLSdk shared] handleOpenURL:url sourceApplication:sourceApplication];
+  return [CalendarManager handleOpen:url sourceApplication:sourceApplication];
+}
+
+#ifdef IS_IOS8orLOWER
+- (BOOL)application:(UIApplication *)application
+continueUserActivity:(NSUserActivity *)userActivity
+  restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *restorableObjects))restorationHandler {
+  [CalendarManager processUserActivity:userActivity];
+  return YES;
+}
+#endif
+
+#ifdef IS_IOS9orLOWER
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
             options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                                                  openURL:url
                                                  options:options];
-  return YES;
+  return [CalendarManager handleOpen:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+  // return YES;
 }
+#endif
 
 @end
 

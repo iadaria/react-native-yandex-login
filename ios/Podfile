@@ -6,12 +6,15 @@ platform :ios, '10.0'
 target 'test_feauters' do
   config = use_native_modules!
 
+  pod 'YandexLoginSDK'
+  pod 'When'
+
   use_react_native!(:path => config["reactNativePath"])
 
   target 'test_feautersTests' do
     inherit! :complete
 
-    pod 'RCTCalendarModule', :path => '../..'
+    
 
     # Pods for testing
   end

@@ -8,4 +8,9 @@ RCT_EXTERN_METHOD(addEvent:(NSString *)name
                   resolver:(RCTPromiseResolveBlock) resolve
                   rejecter:(RCTPromiseRejectBlock) reject)
 
+- (dispatch_queue_t)methodQueue
+{
+  return dispatch_get_main_queue();
+}
+
 @end
