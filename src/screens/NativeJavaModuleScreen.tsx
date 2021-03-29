@@ -1,11 +1,11 @@
-import React from 'react';
-import { Button, StyleSheet, View, Platform, NativeModules } from 'react-native';
+import React, { useState } from 'react';
+import { Button, StyleSheet, View, Platform, NativeModules, Text } from 'react-native';
 import CalendarModule from './moudles/CalendarModule';
 import NewModuleButton from './moudles/NewModuleButton';
 
 export default function NativeJavaModuleScreen() {
+  const [token, setToken] = useState('Nothing');
   const { CalendarManager } = NativeModules;
-
 
   function getConstants() {
     const { DEFAULT_EVENT_NAME } = CalendarModule.getConstants();
@@ -38,10 +38,11 @@ export default function NativeJavaModuleScreen() {
     console.log('Swift constants:', SOME_CONST);
 
     try {
-      const result = await CalendarManager.addEvent('Dasha', 'Chita');
-      console.log(result);
+      const result_token = await CalendarManager.addEvent('Dasha', 'Chita');
+      setToken(result_token);
+      console.log(result_token);
     } catch (error) {
-      console.log('error');
+      console.log('error', error);
     }
   }
 
@@ -68,6 +69,7 @@ export default function NativeJavaModuleScreen() {
       {/* <Button title="Click to invoke your native module!" color="#841584" onPress={onPress} /> */}
       <Button title="Click to invoke your TWO module!" color="#242561" onPress={onSubmit} />
       <Button title="Swift get Constants" color="#242521" onPress={getConstantsSwift} />
+      <Text styles={{ marginTop: 30 }}>{token}</Text>
     </View>
   );
 }

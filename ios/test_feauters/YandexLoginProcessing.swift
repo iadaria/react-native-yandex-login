@@ -1,5 +1,5 @@
 import class Foundation.NSUserActivity
-import struct Foundation.URL
+import stru/Users/iakimova/Documents/freelance/rn/test_feauters/ios/CalendarManager.swiftct Foundation.URL
 import class When.Promise
 
 struct YandexLoginResponse {
