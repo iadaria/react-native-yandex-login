@@ -1,5 +1,11 @@
 #import "AppDelegate.h"
 
+#if __has_include(<VKSdkFramework/VKSdkFramework.h>)
+#import <VKSdkFramework/VKSdkFramework.h>
+#else
+#import "VKSdk.h"
+#endif
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -12,7 +18,8 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 #import <YandexLoginSDK/YandexLoginSDK.h>
-#import "test_feauters-Swift.h"
+#import <GoogleMaps/GoogleMaps.h>
+#import "baniking_mobile-Swift.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #if RCT_DEV
@@ -43,11 +50,11 @@ static void InitializeFlipper(UIApplication *application) {
 #endif
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
-  #if RCT_DEV
-    [bridge moduleForClass:[RCTDevLoadingView class]];
-  #endif
+#if RCT_DEV
+  [bridge moduleForClass:[RCTDevLoadingView class]];
+#endif
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"test_feauters"
+                                                   moduleName:@"baniking_mobile"
                                             initialProperties:nil];
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
@@ -63,14 +70,13 @@ static void InitializeFlipper(UIApplication *application) {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   
+  [GMSServices provideAPIKey:@"AIzaSyAMDDBBRDBRkGsqyUP58_iZ_V5QFWwlRVc"]; // add by Daria for google map
+  
   NSString *clientId = @"707f8fd9b4cf43ea846143b487d73c45";
   NSError *error;
   @try {
-    // BOOL resultActivate = [YandexLoginService activateWithAppId:clientId error:nil];
-    BOOL resultActivate = [CalendarManager activateWithAppId:clientId error:nil];
-    // BOOL result = [[YXLSdk shared] activateWithAppId:clientId error:nil];
+    BOOL resultActivate = [YandexLogin activateWithAppId:clientId error:nil];
     NSLog(resultActivate ? @"YES!!! YXLSdk is initialized" : @"NO YXSdk isn't initialized");
-    // YXLSdk.shared.activate(withAppId: clientId)
   }
   
   @catch ( NSException *e ) {
@@ -81,11 +87,25 @@ static void InitializeFlipper(UIApplication *application) {
   return YES;
 }
 
+
+//iOS 9 workflow
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *,id> *)options {
+    [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+    [[FBSDKApplicationDelegate sharedInstance] application:app
+                                                   openURL:url
+                                                   options:options];
+    return [YandexLogin handleOpen:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+    // return YES;
+}
+
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
+  // return [CodePush bundleURL]; // replace by daria for codepush work
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
@@ -96,30 +116,17 @@ static void InitializeFlipper(UIApplication *application) {
             annotatioin:(id)annotation
 {
   // return [[YXLSdk shared] handleOpenURL:url sourceApplication:sourceApplication];
-  return [CalendarManager handleOpen:url sourceApplication:sourceApplication];
+  return [YandexLogin handleOpen:url sourceApplication:sourceApplication];
 }
 
 #ifdef IS_IOS8orLOWER
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(NSUserActivity *)userActivity
   restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *restorableObjects))restorationHandler {
-  [CalendarManager processUserActivity:userActivity];
+  [YandexLogin processUserActivity:userActivity];
   return YES;
 }
 #endif
 
-#ifdef IS_IOS9orLOWER
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-            options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
-{
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                 openURL:url
-                                                 options:options];
-  return [CalendarManager handleOpen:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
-  // return YES;
-}
-#endif
 
 @end
-
