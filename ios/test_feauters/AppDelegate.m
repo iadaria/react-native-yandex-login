@@ -70,7 +70,7 @@ static void InitializeFlipper(UIApplication *application) {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   
-  [GMSServices provideAPIKey:@"AIzaSyAMDDBBRDBRkGsqyUP58_iZ_V5QFWwlRVc"]; // add by Daria for google map
+  [GMSServices provideAPIKey:@""]; // add by Daria for google map
   
   NSString *clientId = @"707f8fd9b4cf43ea846143b487d73c45";
   NSError *error;
