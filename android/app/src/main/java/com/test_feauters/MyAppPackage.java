@@ -22,6 +22,7 @@ public class MyAppPackage implements ReactPackage {
 
         modules.add(new CalendarModule(reactContext));
         modules.add(new ImagePickerModule(reactContext));
+         modules.add(new YandexLogin(reactContext));
 
         return modules;
     }

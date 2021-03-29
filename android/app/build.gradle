@@ -135,6 +135,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true // custome
+        manifestPlaceholders = [YANDEX_CLIENT_ID:"707f8fd9b4cf43ea846143b487d73c45"]
     }
     splits {
         abi {
@@ -206,6 +207,8 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
+
+    implementation 'com.yandex.android:authsdk:2.3.0' // by daria
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
