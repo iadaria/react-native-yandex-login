@@ -23,12 +23,13 @@ export function yandexLogin(): Promise<{ token: string; expiresIn?: number }> {
   return YandexLogin.login();
 }
 
-export async function getUserInfo(secret: string): Promise<UserInfo | undefined> {
+export async function getUserInfo(secret: string): Promise<UserInfo | null> {
   try {
     const data = await yandexLogin();
     console.log("[Yandex Login]", { secret, authToken: data.token });
     return requestUserInfo(secret, data.token);
   } catch (error) {
     console.log('[Yandex Login Error]', error);
+    return null;
   }
 }
