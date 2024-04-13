@@ -1,5 +1,5 @@
 export async function request<TResponse>(
-    url: URL, 
+    url: string, 
     config: RequestInit
   ): Promise<TResponse> {
   const response = await fetch(url, config);

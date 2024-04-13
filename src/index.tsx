@@ -1,5 +1,3 @@
-import 'react-native-url-polyfill/auto';
-
 import { NativeModules, Platform } from 'react-native';
 import type { UserInfo } from './types/userInfo';
 import { requestUserInfo } from './utils/getUserInfo';
@@ -30,7 +28,7 @@ export async function getUserInfo(secret: string): Promise<UserInfo | undefined>
     const data = await yandexLogin();
     console.log("[Yandex Login]", { secret, authToken: data.token });
     return requestUserInfo(secret, data.token);
-  } catch (e) {
-    console.log('[Yandex Login Error]', { e });
+  } catch (error) {
+    console.log('[Yandex Login Error]', error);
   }
 }
