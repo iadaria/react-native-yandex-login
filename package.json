@@ -1,6 +1,6 @@
 {
   "name": "react-native-yandex-login",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React native package for yandex logining",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
