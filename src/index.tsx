@@ -1,4 +1,8 @@
+import 'react-native-url-polyfill/auto';
+
 import { NativeModules, Platform } from 'react-native';
+import type { UserInfo } from './types/userInfo';
+import { requestUserInfo } from './utils/getUserInfo';
 
 const LINKING_ERROR =
   `The package 'react-native-yandex-login' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +21,16 @@ const YandexLogin = NativeModules.YandexLogin
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return YandexLogin.multiply(a, b);
+export function yandexLogin(): Promise<{ token: string; expiresIn?: number }> {
+  return YandexLogin.login();
+}
+
+export async function getUserInfo(secret: string): Promise<UserInfo | undefined> {
+  try {
+    const data = await yandexLogin();
+    console.log("[Yandex Login]", { secret, authToken: data.token });
+    return requestUserInfo(secret, data.token);
+  } catch (e) {
+    console.log('[Yandex Login Error]', { e });
+  }
 }

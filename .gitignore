@@ -1,3 +1,10 @@
+yarn.lock
+Podfile.lock
+Info.plist
+YandexLoginExample.entitlements
+project.pbxproj
+example/ios/
+example/android/
 # OSX
 #
 .DS_Store
